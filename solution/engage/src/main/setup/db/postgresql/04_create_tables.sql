@@ -1,11 +1,11 @@
-CREATE SCHEMA engage;
-
 CREATE TABLE engage.configuration ( 
 	id                   smallint  NOT NULL,
 	auth_token_duration  smallint  NOT NULL,
 	tax_percentage       numeric(19,2)  NOT NULL,
 	CONSTRAINT pk_configuration PRIMARY KEY ( id )
  );
+
+ALTER TABLE engage.configuration ADD CONSTRAINT ck_0 CHECK ( tax_percentage > 0 );
 
 CREATE TABLE engage."user" ( 
 	id                   integer  NOT NULL,
@@ -49,6 +49,10 @@ CREATE TABLE engage.expense (
 	created_on           timestamp  NOT NULL,
 	CONSTRAINT pk_expense PRIMARY KEY ( id )
  );
+
+ALTER TABLE engage.expense ADD CONSTRAINT ck_1 CHECK ( amount > 0 );
+
+ALTER TABLE engage.expense ADD CONSTRAINT ck_2 CHECK ( tax_value > 0 );
 
 CREATE INDEX idx_expense ON engage.expense ( session_id, user_id );
 

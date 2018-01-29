@@ -8,6 +8,9 @@
 			<index name="pk_configuration" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
+			<constraint name="ck_0" >
+				<string>tax_percentage &gt; 0</string>
+			</constraint>
 		</table>
 		<table name="expense" >
 			<column name="id" type="bigint" jt="-5" mandatory="y" >
@@ -28,6 +31,12 @@
 			<index name="idx_expense_0" unique="NORMAL" >
 				<column name="user_id" />
 			</index>
+			<constraint name="ck_1" >
+				<string>amount &gt; 0</string>
+			</constraint>
+			<constraint name="ck_2" >
+				<string>tax_value &gt; 0</string>
+			</constraint>
 			<fk name="fk_expense_session" to_schema="engage" to_table="session" >
 				<fk_column name="session_id" pk="id" />
 				<fk_column name="user_id" pk="user_id" />
@@ -87,8 +96,8 @@
 	<layout id="Layout_28da8101" name="engage" show_column_type="y" show_relation_columns="y" >
 		<entity schema="engage" name="user" color="90b3d8" x="555" y="45" />
 		<entity schema="engage" name="session" color="90b3d8" x="885" y="45" />
-		<entity schema="engage" name="expense" color="90b3d8" x="555" y="315" />
 		<entity schema="engage" name="configuration" color="90b3d8" x="45" y="225" />
+		<entity schema="engage" name="expense" color="90b3d8" x="555" y="315" />
 		<group name="User" color="2ecc71" >
 			<entity schema="engage" name="expense" />
 			<entity schema="engage" name="session" />

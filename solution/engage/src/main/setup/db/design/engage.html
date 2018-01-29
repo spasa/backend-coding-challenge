@@ -301,11 +301,10 @@ expense ref user ( user_id -&gt; id )' style='fill:#b6b696;'>user_id</text>
 <path d='M 555.50 64.50 L 555.50 45.50 Q 555.50 38.50 562.50 38.50 L 727.50 38.50 Q 734.50 38.50 734.50 45.50 L 734.50 64.50 L555.50 64.50 ' style='fill:url(#tableHeaderGradient0); stroke:none;' />
 <a xlink:href='#user'><text x='629' y='56'>user</text><title>Table engage.user</title></a>
   <use id='nn' x='557' y='72' xlink:href='#nn'/><a xlink:href='#user.id'><use id='pk' x='557' y='71' xlink:href='#pk'/><title>Pk pk_user ( id ) </title></a>
-<a xlink:href='#user.id'><text id='engage.user.id' x='573' y='82' onmouseover="hghl(['session_fk_session_user','expense_fk_expense_user','expense_fk_expense_user'])" onmouseout="uhghl(['session_fk_session_user','expense_fk_expense_user','expense_fk_expense_user'])">id</text><text x='720' y='82' text-anchor='end' class='colType'>integer</text><title>id
+<a xlink:href='#user.id'><text id='engage.user.id' x='573' y='82' onmouseover="hghl(['expense_fk_expense_user','session_fk_session_user'])" onmouseout="uhghl(['expense_fk_expense_user','session_fk_session_user'])">id</text><text x='720' y='82' text-anchor='end' class='colType'>integer</text><title>id
 * integer</title></a>
-<a xlink:href='#user.id'><use id='ref' x='723' y='71' xlink:href='#ref'/><title>Referred by session ( user_id -&gt; id ) 
-Referred by expense ( user_id -&gt; id ) 
-Referred by expense ( user_id -&gt; id ) </title></a>
+<a xlink:href='#user.id'><use id='ref' x='723' y='71' xlink:href='#ref'/><title>Referred by expense ( user_id -&gt; id ) 
+Referred by session ( user_id -&gt; id ) </title></a>
   <a xlink:href='#user.gender'><text id='engage.user.gender' x='573' y='97'>gender</text><text x='720' y='97' text-anchor='end' class='colType'>smallint</text><title>gender
 smallint</title></a>
   <a xlink:href='#user.first_name'><text id='engage.user.first_name' x='573' y='112'>first_name</text><text x='720' y='112' text-anchor='end' class='colType'>varchar(100)</text><title>first_name
@@ -327,20 +326,18 @@ varchar(100)</title></a>
 <path d='M 885.50 64.50 L 885.50 45.50 Q 885.50 38.50 892.50 38.50 L 1057.50 38.50 Q 1064.50 38.50 1064.50 45.50 L 1064.50 64.50 L885.50 64.50 ' style='fill:url(#tableHeaderGradient0); stroke:none;' />
 <a xlink:href='#session'><text x='949' y='56'>session</text><title>Table engage.session</title></a>
   <use id='nn' x='887' y='72' xlink:href='#nn'/><a xlink:href='#session.id'><use id='pk' x='887' y='71' xlink:href='#pk'/><title>Pk pk_session ( id ) Unq pk_session_0 ( id, user_id ) </title></a>
-<a xlink:href='#session.id'><text id='engage.session.id' x='903' y='82' onmouseover="hghl(['expense_fk_expense_session','expense_fk_expense_session'])" onmouseout="uhghl(['expense_fk_expense_session','expense_fk_expense_session'])">id</text><text x='1050' y='82' text-anchor='end' class='colType'>bigint</text><title>id
+<a xlink:href='#session.id'><text id='engage.session.id' x='903' y='82' onmouseover="hghl(['expense_fk_expense_session'])" onmouseout="uhghl(['expense_fk_expense_session'])">id</text><text x='1050' y='82' text-anchor='end' class='colType'>bigint</text><title>id
 * bigint default nextval('session_seq'::regclass)</title></a>
-<a xlink:href='#session.id'><use id='ref' x='1053' y='71' xlink:href='#ref'/><title>Referred by expense ( session_id -&gt; id, user_id ) 
-Referred by expense ( session_id -&gt; id, user_id ) </title></a>
+<a xlink:href='#session.id'><use id='ref' x='1053' y='71' xlink:href='#ref'/><title>Referred by expense ( session_id -&gt; id, user_id ) </title></a>
   <use id='nn' x='887' y='87' xlink:href='#nn'/><a xlink:href='#session.token'><use id='unq' x='887' y='86' xlink:href='#unq'/><title>Unq udx_session_0 ( token ) 
 partial index - where active</title></a>
 <a xlink:href='#session.token'><text id='engage.session.token' x='903' y='97'>token</text><text x='1050' y='97' text-anchor='end' class='colType'>varchar(200)</text><title>token
 * varchar(200)</title></a>
   <use id='nn' x='887' y='102' xlink:href='#nn'/><a xlink:href='#session.user_id'><use id='unq' x='887' y='101' xlink:href='#unq'/><title>idx_session ( user_id ) Unq udx_session_1 ( user_id, token_type ) 
 partial index - where activeUnq pk_session_0 ( id, user_id ) </title></a>
-<a xlink:href='#session.user_id'><text id='engage.session.user_id' x='903' y='112' onmouseover="hghl(['session_fk_session_user','expense_fk_expense_session','expense_fk_expense_session'])" onmouseout="uhghl(['session_fk_session_user','expense_fk_expense_session','expense_fk_expense_session'])">user_id</text><text x='1050' y='112' text-anchor='end' class='colType'>integer</text><title>user_id
+<a xlink:href='#session.user_id'><text id='engage.session.user_id' x='903' y='112' onmouseover="hghl(['session_fk_session_user','expense_fk_expense_session'])" onmouseout="uhghl(['session_fk_session_user','expense_fk_expense_session'])">user_id</text><text x='1050' y='112' text-anchor='end' class='colType'>integer</text><title>user_id
 * integer</title></a>
 <a xlink:href='#session.user_id'><use id='fk' x='1053' y='101' xlink:href='#fk'/><title>References user ( user_id -&gt; id ) 
-Referred by expense ( session_id -&gt; id, user_id ) 
 Referred by expense ( session_id -&gt; id, user_id ) </title></a>
   <use id='nn' x='887' y='117' xlink:href='#nn'/><a xlink:href='#session.token_type'><use id='unq' x='887' y='116' xlink:href='#unq'/><title>Unq udx_session_1 ( user_id, token_type ) 
 partial index - where active</title></a>
@@ -356,6 +353,21 @@ timestamp</title></a>
 varchar(100)</title></a>
   <use id='nn' x='887' y='192' xlink:href='#nn'/><a xlink:href='#session.active'><text id='engage.session.active' x='903' y='202'>active</text><text x='1050' y='202' text-anchor='end' class='colType'>bool</text><title>active
 * bool</title></a>
+
+<!-- ============= Table 'configuration' ============= -->
+<rect class='table' x='45' y='218' width='210' height='90' rx='7' ry='7' />
+<line class='delim' x1='45.500000' y1='244.500000' x2='254.500000' y2='244.500000'/>
+<line class='delim' x1='60.500000' y1='244.500000' x2='60.500000' y2='307.500000'/>
+<line class='delim' x1='243.500000' y1='244.500000' x2='243.500000' y2='307.500000'/>
+<path d='M 45.50 244.50 L 45.50 225.50 Q 45.50 218.50 52.50 218.50 L 247.50 218.50 Q 254.50 218.50 254.50 225.50 L 254.50 244.50 L45.50 244.50 ' style='fill:url(#tableHeaderGradient0); stroke:none;' />
+<a xlink:href='#configuration'><text x='110' y='236'>configuration</text><title>Table engage.configuration</title></a>
+  <use id='nn' x='47' y='252' xlink:href='#nn'/><a xlink:href='#configuration.id'><use id='pk' x='47' y='251' xlink:href='#pk'/><title>Pk pk_configuration ( id ) </title></a>
+<a xlink:href='#configuration.id'><text id='engage.configuration.id' x='63' y='262'>id</text><text x='240' y='262' text-anchor='end' class='colType'>smallint</text><title>id
+* smallint</title></a>
+  <use id='nn' x='47' y='267' xlink:href='#nn'/><a xlink:href='#configuration.auth_token_duration'><text id='engage.configuration.auth_token_duration' x='63' y='277'>auth_token_duration</text><text x='240' y='277' text-anchor='end' class='colType'>smallint</text><title>auth_token_duration
+* smallint</title></a>
+  <use id='nn' x='47' y='282' xlink:href='#nn'/><a xlink:href='#configuration.tax_percentage'><text id='engage.configuration.tax_percentage' x='63' y='292'>tax_percentage</text><text x='240' y='292' text-anchor='end' class='colType'>numeric(19,2)</text><title>tax_percentage
+* numeric(19,2)</title></a>
 
 <!-- ============= Table 'expense' ============= -->
 <rect class='table' x='555' y='308' width='165' height='135' rx='7' ry='7' />
@@ -382,21 +394,6 @@ References user ( user_id -&gt; id ) </title></a>
 numeric(19,4)</title></a>
   <use id='nn' x='557' y='417' xlink:href='#nn'/><a xlink:href='#expense.created_on'><text id='engage.expense.created_on' x='573' y='427'>created_on</text><text x='705' y='427' text-anchor='end' class='colType'>timestamp</text><title>created_on
 * timestamp</title></a>
-
-<!-- ============= Table 'configuration' ============= -->
-<rect class='table' x='45' y='218' width='210' height='90' rx='7' ry='7' />
-<line class='delim' x1='45.500000' y1='244.500000' x2='254.500000' y2='244.500000'/>
-<line class='delim' x1='60.500000' y1='244.500000' x2='60.500000' y2='307.500000'/>
-<line class='delim' x1='243.500000' y1='244.500000' x2='243.500000' y2='307.500000'/>
-<path d='M 45.50 244.50 L 45.50 225.50 Q 45.50 218.50 52.50 218.50 L 247.50 218.50 Q 254.50 218.50 254.50 225.50 L 254.50 244.50 L45.50 244.50 ' style='fill:url(#tableHeaderGradient0); stroke:none;' />
-<a xlink:href='#configuration'><text x='110' y='236'>configuration</text><title>Table engage.configuration</title></a>
-  <use id='nn' x='47' y='252' xlink:href='#nn'/><a xlink:href='#configuration.id'><use id='pk' x='47' y='251' xlink:href='#pk'/><title>Pk pk_configuration ( id ) </title></a>
-<a xlink:href='#configuration.id'><text id='engage.configuration.id' x='63' y='262'>id</text><text x='240' y='262' text-anchor='end' class='colType'>smallint</text><title>id
-* smallint</title></a>
-  <use id='nn' x='47' y='267' xlink:href='#nn'/><a xlink:href='#configuration.auth_token_duration'><text id='engage.configuration.auth_token_duration' x='63' y='277'>auth_token_duration</text><text x='240' y='277' text-anchor='end' class='colType'>smallint</text><title>auth_token_duration
-* smallint</title></a>
-  <use id='nn' x='47' y='282' xlink:href='#nn'/><a xlink:href='#configuration.tax_percentage'><text id='engage.configuration.tax_percentage' x='63' y='292'>tax_percentage</text><text x='240' y='292' text-anchor='end' class='colType'>numeric(19,2)</text><title>tax_percentage
-* numeric(19,2)</title></a>
 
 </g></svg>
 
@@ -549,6 +546,42 @@ numeric(19,4)</title></a>
 <br/><br/>
 <table class='bordered'>
 <thead>
+<tr><th colspan='4'><a name='configuration'>Table configuration</a></th></tr>
+</thead>
+<tbody>
+	<tr>
+		<td>*</td>
+		<td><a name='configuration.id'>id</a></td>
+		<td> smallint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='configuration.auth_token_duration'>auth&#95;token&#95;duration</a></td>
+		<td> smallint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='configuration.tax_percentage'>tax&#95;percentage</a></td>
+		<td> numeric&#40; 19&#44; 2 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'><b>Indexes</b></th></tr>
+	<tr>		<td>Pk</td><td>pk&#95;configuration</td>
+		<td> ON id</td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'><b>Constraints</b></th></tr>
+	<tr>
+		<td>&nbsp;</td><td> ck_0 </td><td> tax&#95;percentage &gt; 0 </td><td> </td>
+	</tr>
+</tbody>
+</table>
+
+<br/><br/>
+<table class='bordered'>
+<thead>
 <tr><th colspan='4'><a name='expense'>Table expense</a></th></tr>
 </thead>
 <tbody>
@@ -612,37 +645,12 @@ numeric(19,4)</title></a>
 		<td > ( user&#95;id ) ref <a href='#user'>user</a> (id) </td>
 		<td>  </td>
 	</tr>
-</tbody>
-</table>
-
-<br/><br/>
-<table class='bordered'>
-<thead>
-<tr><th colspan='4'><a name='configuration'>Table configuration</a></th></tr>
-</thead>
-<tbody>
+<tr><th colspan='4'><b>Constraints</b></th></tr>
 	<tr>
-		<td>*</td>
-		<td><a name='configuration.id'>id</a></td>
-		<td> smallint   </td>
-		<td>  </td>
+		<td>&nbsp;</td><td> ck_1 </td><td> amount &gt; 0 </td><td> </td>
 	</tr>
 	<tr>
-		<td>*</td>
-		<td><a name='configuration.auth_token_duration'>auth&#95;token&#95;duration</a></td>
-		<td> smallint   </td>
-		<td>  </td>
-	</tr>
-	<tr>
-		<td>*</td>
-		<td><a name='configuration.tax_percentage'>tax&#95;percentage</a></td>
-		<td> numeric&#40; 19&#44; 2 &#41;   </td>
-		<td>  </td>
-	</tr>
-<tr><th colspan='4'><b>Indexes</b></th></tr>
-	<tr>		<td>Pk</td><td>pk&#95;configuration</td>
-		<td> ON id</td>
-		<td>  </td>
+		<td>&nbsp;</td><td> ck_2 </td><td> tax&#95;value &gt; 0 </td><td> </td>
 	</tr>
 </tbody>
 </table>
