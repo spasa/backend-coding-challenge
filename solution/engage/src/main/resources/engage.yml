@@ -1,0 +1,49 @@
+database:
+    driverClass: org.postgresql.Driver
+    user: engage
+    password: engage
+    url: jdbc:postgresql://localhost/engage
+    properties:
+        vendor: postgresql
+        charSet: UTF-8
+    maxWaitForConnection: 1s
+    validationQuery: "/* Health Check */ SELECT 1"
+    minSize: 8
+    maxSize: 32
+    checkConnectionWhileIdle: false
+
+server:
+  applicationConnectors:
+    - type: http
+      port: 8080
+  adminConnectors:
+    - type: http
+      port: 8081
+
+# Logging settings.
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: INFO
+
+  # Logger-specific levels.
+  loggers:
+
+    # Overrides the level of com.example.dw.Thing and sets it to DEBUG.
+    "com.engage": DEBUG
+
+  appenders:
+    # Log warnings and errors to stderr
+    - type: console
+      threshold: ALL
+      timeZone: CET
+      logFormat: "%-5p %d{HH:mm:ss.SSS} [%thread] %logger{50}: %m%n%xEx"
+
+#    - type: file
+#      threshold: ALL
+#      timeZone: CET
+#      logFormat: "%-5p %d{HH:mm:ss.SSS} [%thread] %logger{50}: %m%n%xEx"
+#      currentLogFilename: ./logs/engage.log
+#      archive: true
+#      archivedLogFilenamePattern: ./logs/engage-%d.log.gz
+#      archivedFileCount: 5  
