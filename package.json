@@ -49,6 +49,7 @@
     "watchify": "^3.7.0"
   },
   "devDependencies": {
-    "gulp-connect": "^5.0.0"
+    "gulp-connect": "^5.0.0",
+    "gulp-streamify": "^1.0.2"
   }
 }

@@ -87,7 +87,9 @@ gulp.task("iconfont", function(){
 	return gulp.src([settings.paths.build.source + "font-svgs/iconfont/*.svg"])
 	.pipe(iconfont({
 		fontName: "iconfont",
-		appendCodepoints: false
+		appendCodepoints: false,
+		fontHeight: 1001,
+		normalize: true,
 	}))
 	.on("glyphs", function(glyphs, options) {
 		iconList = [];
