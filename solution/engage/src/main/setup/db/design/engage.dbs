@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="engage" id="Project_11018f85" html="y" template="Default" database="PostgreSQL" >
+	<schema name="engage" schemaname="engage" >
+		<table name="configuration" >
+			<column name="id" type="smallint" jt="5" mandatory="y" />
+			<column name="auth_token_duration" type="smallint" jt="5" mandatory="y" />
+			<column name="tax_percentage" type="numeric" length="19" decimal="2" jt="2" mandatory="y" />
+			<index name="pk_configuration" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="expense" >
+			<column name="id" type="bigint" jt="-5" mandatory="y" >
+				<defo>nextval(&#039;expense_seq&#039;::regclass)</defo>
+			</column>
+			<column name="user_id" type="integer" jt="4" mandatory="y" />
+			<column name="session_id" type="bigint" jt="-5" mandatory="y" />
+			<column name="amount" type="numeric" length="19" decimal="4" jt="2" mandatory="y" />
+			<column name="tax_value" type="numeric" length="19" decimal="4" jt="2" />
+			<column name="created_on" type="timestamp" jt="93" mandatory="y" />
+			<index name="pk_expense" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_expense" unique="NORMAL" >
+				<column name="session_id" />
+				<column name="user_id" />
+			</index>
+			<index name="idx_expense_0" unique="NORMAL" >
+				<column name="user_id" />
+			</index>
+			<fk name="fk_expense_session" to_schema="engage" to_table="session" >
+				<fk_column name="session_id" pk="id" />
+				<fk_column name="user_id" pk="user_id" />
+			</fk>
+			<fk name="fk_expense_user" to_schema="engage" to_table="user" >
+				<fk_column name="user_id" pk="id" />
+			</fk>
+		</table>
+		<table name="session" >
+			<column name="id" type="bigint" jt="-5" mandatory="y" >
+				<defo>nextval(&#039;session_seq&#039;::regclass)</defo>
+			</column>
+			<column name="token" type="varchar" length="200" jt="12" mandatory="y" />
+			<column name="user_id" type="integer" jt="4" mandatory="y" />
+			<column name="token_type" type="smallint" jt="5" mandatory="y" />
+			<column name="create_time" type="timestamp" jt="93" mandatory="y" />
+			<column name="access_time" type="timestamp" jt="93" />
+			<column name="expiry_time" type="timestamp" jt="93" />
+			<column name="ip_address" type="varchar" length="100" jt="12" />
+			<column name="active" type="bool" jt="-7" mandatory="y" />
+			<index name="pk_session" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_session" unique="NORMAL" >
+				<column name="user_id" />
+			</index>
+			<index name="udx_session_0" unique="UNIQUE" >
+				<comment>partial index - where active</comment>
+				<column name="token" />
+			</index>
+			<index name="udx_session_1" unique="UNIQUE" >
+				<comment>partial index - where active</comment>
+				<column name="user_id" />
+				<column name="token_type" />
+			</index>
+			<index name="pk_session_0" unique="UNIQUE" >
+				<column name="id" />
+				<column name="user_id" />
+			</index>
+			<fk name="fk_session_user" to_schema="engage" to_table="user" >
+				<fk_column name="user_id" pk="id" />
+			</fk>
+		</table>
+		<table name="user" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="gender" type="smallint" jt="5" />
+			<column name="first_name" type="varchar" length="100" jt="12" />
+			<column name="last_name" type="varchar" length="100" jt="12" />
+			<column name="username" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="password" type="varchar" length="200" jt="12" mandatory="y" />
+			<column name="created_on" type="timestamp" jt="93" mandatory="y" />
+			<index name="pk_user" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+	</schema>
+	<layout id="Layout_28da8101" name="engage" show_column_type="y" show_relation_columns="y" >
+		<entity schema="engage" name="user" color="90b3d8" x="555" y="45" />
+		<entity schema="engage" name="session" color="90b3d8" x="885" y="45" />
+		<entity schema="engage" name="expense" color="90b3d8" x="555" y="315" />
+		<entity schema="engage" name="configuration" color="90b3d8" x="45" y="225" />
+		<group name="User" color="2ecc71" >
+			<entity schema="engage" name="expense" />
+			<entity schema="engage" name="session" />
+			<entity schema="engage" name="user" />
+		</group>
+	</layout>
+</project>
