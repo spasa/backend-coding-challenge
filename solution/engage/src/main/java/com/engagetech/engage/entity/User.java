@@ -86,7 +86,7 @@ public class User {
             return false;
         }
         final User other = (User) obj;
-        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
+        if (this.id == null || !this.id.equals(other.id)) {
             return false;
         }
         return true;
