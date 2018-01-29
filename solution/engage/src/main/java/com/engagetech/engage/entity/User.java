@@ -1,9 +1,5 @@
 package com.engagetech.engage.entity;
 
-/**
- *
- * @author spasa
- */
 public class User {
     
     private Integer id;

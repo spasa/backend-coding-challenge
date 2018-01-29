@@ -1,6 +1,7 @@
 package com.engagetech.engage.bundle;
 
 import com.engagetech.engage.config.EngageConfiguration;
+import com.engagetech.engage.dao.common.GenderAsShortArgumentFactory;
 import com.engagetech.engage.pico.ComponentManager;
 import io.dropwizard.Configuration;
 import io.dropwizard.ConfiguredBundle;
@@ -41,6 +42,8 @@ public class EngageComponentBundle<T extends EngageConfiguration> implements Con
         final String dbVendor = cfg.getDatabaseFactory().getProperties().get("vendor");
         final DBIFactory factory = new DBIFactory();
         final DBI jdbi = factory.build(environment, cfg.getDatabaseFactory(), dbVendor);
+        
+        jdbi.registerArgumentFactory(new GenderAsShortArgumentFactory());
 
         container.addComponent(DBI.class, jdbi);
     }
