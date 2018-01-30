@@ -2,11 +2,15 @@ package com.engagetech.engage.resource;
 
 import com.engagetech.engage.api.response.ErrorResponse;
 import com.engagetech.engage.api.response.SuccessResponse;
+import com.engagetech.engage.auth.Auth;
 import com.engagetech.engage.business.ExpenseManager;
 import com.engagetech.engage.commons.util.JDBIUtil;
 import com.engagetech.engage.dao.ExpenseDAO;
 import com.engagetech.engage.entity.Expense;
+import com.engagetech.engage.entity.User;
 import com.engagetech.engage.exception.ApplicationException;
+import com.engagetech.engage.i18n.EngageLocale;
+import com.engagetech.engage.i18n.EngageLocaleFactory;
 import com.engagetech.engage.pico.ComponentManager;
 import java.sql.SQLException;
 import java.util.List;
@@ -35,10 +39,11 @@ public class ExpenseResource {
 
 
     @POST
-    public Response create(Expense expense) {
-//        TODO: add authorization
+    public Response create(@Auth User user, 
+                           Expense expense) {
+        expense.setUserId(user.getId());
         try {
-            expenseManager.createExpense(expense);
+            expenseManager.createExpense(expense, user.getLanguage());
             return SuccessResponse.create(expense);
         } catch (ApplicationException ex) {
             logger.error("Error while creating expense", ex);
@@ -47,22 +52,24 @@ public class ExpenseResource {
     }
     
     @GET
-    public Response getExpenses(@QueryParam("offset") @DefaultValue("0") Integer offset,
+    public Response getExpenses(@Auth User user,
+                                @QueryParam("offset") @DefaultValue("0") Integer offset,
                                 @QueryParam("limit") @DefaultValue("500") Integer limit) {
+        EngageLocale locale = ComponentManager.instance().getComponent(EngageLocaleFactory.class).getLocale(user.getLanguage());
         Handle handle = null;
         
         try {
             handle = JDBIUtil.beginTransaction();
             ExpenseDAO expenseDAO = handle.attach(ExpenseDAO.class);
 
-            List<Expense> expenses = expenseDAO.find(1, offset, limit);
+            List<Expense> expenses = expenseDAO.find(user.getId(), offset, limit);
             
             handle.commit();
             
             return SuccessResponse.create(expenses);
         } catch (DBIException | SQLException ex) {
-            logger.error("Error while loading verification docs", ex);
-            return ErrorResponse.create("Error Message");
+            logger.error("Error while loading expenses", ex);
+            return ErrorResponse.create(locale.getMessage("expense.resource.get.expenses.error"));
         } finally {
             if (handle != null) {
                 handle.rollback();

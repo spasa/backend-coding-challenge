@@ -4,6 +4,9 @@ import com.engagetech.engage.commons.util.JDBIUtil;
 import com.engagetech.engage.dao.ExpenseDAO;
 import com.engagetech.engage.entity.Expense;
 import com.engagetech.engage.exception.ApplicationException;
+import com.engagetech.engage.i18n.EngageLocale;
+import com.engagetech.engage.i18n.EngageLocaleFactory;
+import com.engagetech.engage.pico.ComponentManager;
 import java.sql.SQLException;
 import org.skife.jdbi.v2.Handle;
 import org.skife.jdbi.v2.exceptions.DBIException;
@@ -15,9 +18,8 @@ public class ExpenseManager {
     
     private static final Logger logger = LoggerFactory.getLogger(ExpenseManager.class);
     
-    public void createExpense(Expense expense) throws ApplicationException {
-//        TODO: add localization
-        
+    public void createExpense(Expense expense, String language) throws ApplicationException {
+        EngageLocale locale = ComponentManager.instance().getComponent(EngageLocaleFactory.class).getLocale(language);
         Handle handle = null;
 
         try {

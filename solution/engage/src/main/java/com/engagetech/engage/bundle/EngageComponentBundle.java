@@ -3,6 +3,9 @@ package com.engagetech.engage.bundle;
 import com.engagetech.engage.business.ExpenseManager;
 import com.engagetech.engage.config.EngageConfiguration;
 import com.engagetech.engage.dao.common.GenderAsShortArgumentFactory;
+import com.engagetech.engage.i18n.EngageENLocale;
+import com.engagetech.engage.i18n.EngageLocaleFactory;
+import com.engagetech.engage.i18n.EngageSRLocale;
 import com.engagetech.engage.pico.ComponentManager;
 import com.engagetech.engage.resource.ExpenseResource;
 import io.dropwizard.Configuration;
@@ -38,6 +41,9 @@ public class EngageComponentBundle<T extends EngageConfiguration> implements Con
     private void registerApplicationScope(MutablePicoContainer container, Configuration configuration, Environment environment) throws IOException {
         container.addComponent(Configuration.class, configuration);
         container.addComponent(Environment.class, environment);
+        container.addComponent(EngageENLocale.class, new EngageENLocale());
+        container.addComponent(EngageSRLocale.class, new EngageSRLocale());
+        container.addComponent(EngageLocaleFactory.class, new EngageLocaleFactory());
     }
 
     private void registerJdbiResources(MutablePicoContainer container, Environment environment, EngageConfiguration cfg) throws ClassNotFoundException {
