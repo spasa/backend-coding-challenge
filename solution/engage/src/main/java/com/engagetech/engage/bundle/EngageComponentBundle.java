@@ -1,8 +1,10 @@
 package com.engagetech.engage.bundle;
 
+import com.engagetech.engage.business.ExpenseManager;
 import com.engagetech.engage.config.EngageConfiguration;
 import com.engagetech.engage.dao.common.GenderAsShortArgumentFactory;
 import com.engagetech.engage.pico.ComponentManager;
+import com.engagetech.engage.resource.ExpenseResource;
 import io.dropwizard.Configuration;
 import io.dropwizard.ConfiguredBundle;
 import io.dropwizard.jdbi.DBIFactory;
@@ -49,9 +51,12 @@ public class EngageComponentBundle<T extends EngageConfiguration> implements Con
     }
 
     private void registerResources(Environment environment) {
+        environment.jersey().register(ExpenseResource.class);
     }
 
     private void registerManagers(MutablePicoContainer container, T configuration, Environment environment) throws Exception {
+        ExpenseManager expenseManager = new ExpenseManager();
+        container.addComponent(ExpenseManager.class, expenseManager);
         
     }
     
