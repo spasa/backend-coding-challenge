@@ -13,7 +13,7 @@ import org.skife.jdbi.v2.sqlobject.stringtemplate.UseStringTemplate3StatementLoc
 @UseStringTemplate3StatementLocator
 public interface ExpenseDAO {
     
-    @SqlQuery("SELECT * FROM insert_expense(:userId, :sessionId, :amount, :taxValue)")
+    @SqlQuery("SELECT * FROM insert_expense(:userId, :sessionId, :forDate, :amount, :taxValue, :reason)")
     public abstract Long insert(@BindBean Expense expense);
     
     @SqlQuery()

@@ -1,7 +1,10 @@
 package com.engagetech.engage.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Expense {
@@ -9,8 +12,17 @@ public class Expense {
     private Long id;
     private Integer userId;
     private Long sessionId;
+    
+    @JsonProperty("date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", timezone = "GMT")
+    private Date forDate;
+    
     private BigDecimal amount;
+    
+    @JsonProperty("vat")
     private BigDecimal taxValue;
+    
+    private String reason;
 
     public Long getId() {
         return id;
@@ -36,6 +48,14 @@ public class Expense {
         this.sessionId = sessionId;
     }
 
+    public Date getForDate() {
+        return forDate;
+    }
+
+    public void setForDate(Date forDate) {
+        this.forDate = forDate;
+    }
+
     public BigDecimal getAmount() {
         return amount;
     }
@@ -52,6 +72,13 @@ public class Expense {
         this.taxValue = taxValue;
     }
 
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
 
     @Override
     public int hashCode() {
@@ -80,7 +107,7 @@ public class Expense {
 
     @Override
     public String toString() {
-        return "Expense{" + "id=" + id + ", userId=" + userId + ", sessionId=" + sessionId + ", amount=" + amount + ", taxValue=" + taxValue + '}';
+        return "Expense{" + "id=" + id + ", userId=" + userId + ", sessionId=" + sessionId + ", forDate=" + forDate + ", amount=" + amount + ", taxValue=" + taxValue + ", reason=" + reason + '}';
     }
-    
+
 }

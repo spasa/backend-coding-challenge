@@ -28,6 +28,7 @@ public class EngageAuthenticator implements Authenticator<EngageCredentials, Use
 
         User user = new User();
         user.setId(1);
+        user.setSessionId(1l);
 
         return Optional.of(user);
     }

@@ -3,6 +3,7 @@ group ExpenseDAO;
 find(OFFSET, LIMIT) ::= <<
 SELECT * FROM expense
 WHERE user_id = :userId
+ORDER BY id DESC
 <if(OFFSET)>
     OFFSET :offset 
 <endif>

@@ -18,8 +18,10 @@
 			</column>
 			<column name="user_id" type="integer" jt="4" mandatory="y" />
 			<column name="session_id" type="bigint" jt="-5" mandatory="y" />
+			<column name="for_date" type="date" jt="91" mandatory="y" />
 			<column name="amount" type="numeric" length="19" decimal="4" jt="2" mandatory="y" />
 			<column name="tax_value" type="numeric" length="19" decimal="4" jt="2" />
+			<column name="reason" type="varchar" length="500" jt="12" mandatory="y" />
 			<column name="created_on" type="timestamp" jt="93" mandatory="y" />
 			<index name="pk_expense" unique="PRIMARY_KEY" >
 				<column name="id" />

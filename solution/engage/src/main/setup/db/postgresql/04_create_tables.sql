@@ -44,8 +44,10 @@ CREATE TABLE expense (
 	id                   bigint DEFAULT nextval('expense_seq'::regclass) NOT NULL,
 	user_id              integer  NOT NULL,
 	session_id           bigint  NOT NULL,
+	for_date             date  NOT NULL,
 	amount               numeric(19,4)  NOT NULL,
 	tax_value            numeric(19,4)  ,
+	reason               varchar(500)  NOT NULL,
 	created_on           timestamp  NOT NULL,
 	CONSTRAINT pk_expense PRIMARY KEY ( id )
  );

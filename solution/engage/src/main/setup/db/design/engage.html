@@ -95,7 +95,7 @@ table {
 </head>
 
 <body>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'   width='1110' height='605' viewbox='0 0 1110 605' >
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'   width='1110' height='635' viewbox='0 0 1110 635' >
   <script type='text/ecmascript'>
   <![CDATA[
   function hghl(el) { for ( var i in el ){ document.getElementById(el[i]).setAttribute('class','highlight');  }  }
@@ -252,7 +252,7 @@ table {
 </defs>
 
 <!-- ============= Desktop ============= -->
-<rect x='1' y='1' width='1108' height='603' rx='7' ry='7' style='fill:#f7f7f7; stroke:#333333; stroke-width:0.5;'/>
+<rect x='1' y='1' width='1108' height='633' rx='7' ry='7' style='fill:#f7f7f7; stroke:#333333; stroke-width:0.5;'/>
 
 <!-- ============= Legend ============= -->
 <g transform='translate(10,10)'>
@@ -265,7 +265,7 @@ table {
 
 <g transform='translate(0,110)'>
 <!-- ============= Group 'User' ============= -->
-<rect class='grp' style='fill:#2ecc71;stroke:#cee0d6' x='539' y='10' width='542' height='455' />
+<rect class='grp' style='fill:#2ecc71;stroke:#cee0d6' x='539' y='10' width='542' height='485' />
 <text x='550' y='25'>User</text>
 <rect style='fill:url(#groupUnderTitleLine); stroke-width:2;' x='550' y='28' width='520' height='2' />
 
@@ -370,10 +370,10 @@ varchar(100)</title></a>
 * numeric(19,2)</title></a>
 
 <!-- ============= Table 'expense' ============= -->
-<rect class='table' x='555' y='308' width='165' height='135' rx='7' ry='7' />
+<rect class='table' x='555' y='308' width='165' height='165' rx='7' ry='7' />
 <line class='delim' x1='555.500000' y1='334.500000' x2='719.500000' y2='334.500000'/>
-<line class='delim' x1='570.500000' y1='334.500000' x2='570.500000' y2='442.500000'/>
-<line class='delim' x1='708.500000' y1='334.500000' x2='708.500000' y2='442.500000'/>
+<line class='delim' x1='570.500000' y1='334.500000' x2='570.500000' y2='472.500000'/>
+<line class='delim' x1='708.500000' y1='334.500000' x2='708.500000' y2='472.500000'/>
 <path d='M 555.50 334.50 L 555.50 315.50 Q 555.50 308.50 562.50 308.50 L 712.50 308.50 Q 719.50 308.50 719.50 315.50 L 719.50 334.50 L555.50 334.50 ' style='fill:url(#tableHeaderGradient0); stroke:none;' />
 <a xlink:href='#expense'><text x='610' y='326'>expense</text><title>Table engage.expense</title></a>
   <use id='nn' x='557' y='342' xlink:href='#nn'/><a xlink:href='#expense.id'><use id='pk' x='557' y='341' xlink:href='#pk'/><title>Pk pk_expense ( id ) </title></a>
@@ -388,11 +388,15 @@ References user ( user_id -&gt; id ) </title></a>
 <a xlink:href='#expense.session_id'><text id='engage.expense.session_id' x='573' y='382' onmouseover="hghl(['expense_fk_expense_session'])" onmouseout="uhghl(['expense_fk_expense_session'])">session_id</text><text x='705' y='382' text-anchor='end' class='colType'>bigint</text><title>session_id
 * bigint</title></a>
 <a xlink:href='#expense.session_id'><use id='fk' x='708' y='371' xlink:href='#fk'/><title>References session ( session_id -&gt; id, user_id ) </title></a>
-  <use id='nn' x='557' y='387' xlink:href='#nn'/><a xlink:href='#expense.amount'><text id='engage.expense.amount' x='573' y='397'>amount</text><text x='705' y='397' text-anchor='end' class='colType'>numeric(19,4)</text><title>amount
+  <use id='nn' x='557' y='387' xlink:href='#nn'/><a xlink:href='#expense.for_date'><text id='engage.expense.for_date' x='573' y='397'>for_date</text><text x='705' y='397' text-anchor='end' class='colType'>date</text><title>for_date
+* date</title></a>
+  <use id='nn' x='557' y='402' xlink:href='#nn'/><a xlink:href='#expense.amount'><text id='engage.expense.amount' x='573' y='412'>amount</text><text x='705' y='412' text-anchor='end' class='colType'>numeric(19,4)</text><title>amount
 * numeric(19,4)</title></a>
-  <a xlink:href='#expense.tax_value'><text id='engage.expense.tax_value' x='573' y='412'>tax_value</text><text x='705' y='412' text-anchor='end' class='colType'>numeric(19,4)</text><title>tax_value
+  <a xlink:href='#expense.tax_value'><text id='engage.expense.tax_value' x='573' y='427'>tax_value</text><text x='705' y='427' text-anchor='end' class='colType'>numeric(19,4)</text><title>tax_value
 numeric(19,4)</title></a>
-  <use id='nn' x='557' y='417' xlink:href='#nn'/><a xlink:href='#expense.created_on'><text id='engage.expense.created_on' x='573' y='427'>created_on</text><text x='705' y='427' text-anchor='end' class='colType'>timestamp</text><title>created_on
+  <use id='nn' x='557' y='432' xlink:href='#nn'/><a xlink:href='#expense.reason'><text id='engage.expense.reason' x='573' y='442'>reason</text><text x='705' y='442' text-anchor='end' class='colType'>varchar(500)</text><title>reason
+* varchar(500)</title></a>
+  <use id='nn' x='557' y='447' xlink:href='#nn'/><a xlink:href='#expense.created_on'><text id='engage.expense.created_on' x='573' y='457'>created_on</text><text x='705' y='457' text-anchor='end' class='colType'>timestamp</text><title>created_on
 * timestamp</title></a>
 
 </g></svg>
@@ -605,6 +609,12 @@ numeric(19,4)</title></a>
 	</tr>
 	<tr>
 		<td>*</td>
+		<td><a name='expense.for_date'>for&#95;date</a></td>
+		<td> date   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
 		<td><a name='expense.amount'>amount</a></td>
 		<td> numeric&#40; 19&#44; 4 &#41;   </td>
 		<td>  </td>
@@ -613,6 +623,12 @@ numeric(19,4)</title></a>
 		<td>&nbsp;</td>
 		<td><a name='expense.tax_value'>tax&#95;value</a></td>
 		<td> numeric&#40; 19&#44; 4 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='expense.reason'>reason</a></td>
+		<td> varchar&#40; 500 &#41;   </td>
 		<td>  </td>
 	</tr>
 	<tr>

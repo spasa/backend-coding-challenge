@@ -14,8 +14,10 @@ public class ExpenseMapper implements ResultSetMapper<Expense> {
         expense.setId(rs.getLong("id"));
         expense.setUserId(rs.getInt("user_id"));
         expense.setSessionId(rs.getLong("session_id"));
+        expense.setForDate(rs.getDate("for_date"));
         expense.setAmount(rs.getBigDecimal("amount"));
         expense.setTaxValue(rs.getBigDecimal("tax_value"));
+        expense.setReason(rs.getString("reason"));
         
         return expense;
     }

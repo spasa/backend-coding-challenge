@@ -42,6 +42,7 @@ public class ExpenseResource {
     public Response create(@Auth User user, 
                            Expense expense) {
         expense.setUserId(user.getId());
+        expense.setSessionId(user.getSessionId());
         try {
             expenseManager.createExpense(expense, user.getLanguage());
             return SuccessResponse.create(expense);
