@@ -33,6 +33,10 @@ app.controller("ctrlExpenses", ["$rootScope", "$scope", "config", "restalchemy",
 
 	$scope.saveExpense = function() {
 		if ($scope.expensesform.$valid) {
+			//setup currency and amount and post to backend
+			$scope.newExpense.currency = $scope.newExpense.amount.replace(/\d+/g, '').trim();
+			$scope.newExpense.amount = Number($scope.newExpense.amount.replace(/[^0-9\.-]+/g,""));
+
 			// Post the expense via REST
 			restExpenses.post($scope.newExpense).then(function() {
 				// Reload new expenses list
@@ -43,6 +47,12 @@ app.controller("ctrlExpenses", ["$rootScope", "$scope", "config", "restalchemy",
 
 	$scope.clearExpense = function() {
 		$scope.newExpense = {};
+	};
+
+	$scope.setTax = function() {
+		var grossAmount = Number($scope.newExpense.amount.replace(/[^0-9\.-]+/g,""));
+
+		$scope.newExpense.vat = grossAmount - (grossAmount / (1 + 20/100));
 	};
 
 	// Initialise scope variables
