@@ -1,6 +1,8 @@
 package com.engagetech.engage.bundle;
 
 import com.engagetech.engage.business.ExpenseManager;
+import com.engagetech.engage.business.JobManager;
+import com.engagetech.engage.cache.EngageCache;
 import com.engagetech.engage.config.EngageConfiguration;
 import com.engagetech.engage.dao.common.GenderAsShortArgumentFactory;
 import com.engagetech.engage.i18n.EngageENLocale;
@@ -39,6 +41,11 @@ public class EngageComponentBundle<T extends EngageConfiguration> implements Con
         registerResources(environment);
         
         registerClients(applicationScopeContainer, configuration, environment);
+        
+        loadCache(applicationScopeContainer);
+        
+        startJobs(applicationScopeContainer);
+        setupInitExchangeRate(applicationScopeContainer);
     }
 
     public void initialize(Bootstrap<?> btstrp) {
@@ -80,6 +87,19 @@ public class EngageComponentBundle<T extends EngageConfiguration> implements Con
         client.register(new LoggingFeature(java.util.logging.Logger.getLogger(LoggingFeature.DEFAULT_LOGGER_NAME), Level.INFO, LoggingFeature.Verbosity.PAYLOAD_ANY, LoggingFeature.DEFAULT_MAX_ENTITY_SIZE));
         
         container.addComponent(Client.class, client);
+    }
+    
+    private void loadCache(MutablePicoContainer container) {
+        EngageCache cache = EngageCache.getInstance();
+        container.addComponent(EngageCache.class, cache);
+    }
+    
+    private void startJobs(MutablePicoContainer container) {
+        container.getComponent(JobManager.class).startUpdateExchangeRateJob();
+    }
+    
+    private void setupInitExchangeRate(MutablePicoContainer container) {
+        container.getComponent(ExpenseManager.class).updateExchangeRate();
     }
     
 }
