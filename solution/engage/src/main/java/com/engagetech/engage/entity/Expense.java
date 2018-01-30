@@ -23,6 +23,7 @@ public class Expense {
     private BigDecimal taxValue;
     
     private String reason;
+    private String currency;
 
     public Long getId() {
         return id;
@@ -78,6 +79,14 @@ public class Expense {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
     @Override

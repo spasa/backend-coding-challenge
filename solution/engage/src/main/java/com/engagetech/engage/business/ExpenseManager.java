@@ -13,12 +13,10 @@ import com.engagetech.engage.pico.ComponentManager;
 import com.fasterxml.jackson.databind.JsonNode;
 import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 import javax.ws.rs.client.Client;
-import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.commons.lang3.StringUtils;
 import org.skife.jdbi.v2.Handle;
 import org.skife.jdbi.v2.exceptions.DBIException;
 import org.slf4j.Logger;
@@ -34,6 +32,13 @@ public class ExpenseManager {
         Handle handle = null;
 
         try {
+            if (StringUtils.isNotBlank(expense.getCurrency())) {
+//              if exchange is done, then setup tax value on null and will be 
+//              recalculated in database (value passed from client is wrong because of exchange rate)
+                expense.setAmount(convertCurrency(expense.getAmount(), expense.getCurrency(), locale));
+                expense.setTaxValue(null);
+            }
+            
             handle = JDBIUtil.beginTransaction();
 
             ExpenseDAO expenseDAO = handle.attach(ExpenseDAO.class);
@@ -50,6 +55,22 @@ public class ExpenseManager {
                 handle.close();
             }
         }
+    }
+    
+    public BigDecimal convertCurrency(BigDecimal amount, String currency, EngageLocale locale) throws ApplicationException {
+        EngageConfiguration configuration = ComponentManager.instance().getComponent(EngageConfiguration.class);
+        EngageCache cache = ComponentManager.instance().getComponent(EngageCache.class);
+        
+        if (!configuration.getCurrencyConfiguration().getExchangeCurrency().equalsIgnoreCase(currency)) {
+            throw new ApplicationException(locale.getMessage("expense.manager.convert.currency.unknown.currency"));
+        }
+        
+        BigDecimal exchangeRate = (BigDecimal) cache.get("exchangeRate");
+        if (exchangeRate == null) {
+            throw new ApplicationException(locale.getMessage("expense.manager.convert.currency.no.rate"));
+        }
+        
+        return amount.multiply(exchangeRate);
     }
     
     public void updateExchangeRate() {

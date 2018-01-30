@@ -55,3 +55,12 @@ jerseyClientConfiguration:
     gzipEnabled: false
     gzipEnabledForRequests: false
     chunkedEncodingEnabled: false
+    
+#Cron Expressions
+cronJob:
+    updateExchangeRateJobCronExpression: '0 */2 * * * ?'
+  
+currencyConfiguration:
+    exchangeRateUrl: https://api.fixer.io/latest
+    baseCurrency: GBP
+    exchangeCurrency: EUR

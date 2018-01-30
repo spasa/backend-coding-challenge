@@ -78,6 +78,8 @@ public class EngageComponentBundle<T extends EngageConfiguration> implements Con
         ExpenseManager expenseManager = new ExpenseManager();
         container.addComponent(ExpenseManager.class, expenseManager);
         
+        JobManager jobManager = new JobManager();
+        container.addComponent(JobManager.class, jobManager);
     }
     
     private void registerClients(MutablePicoContainer container, T configuration, Environment environment) throws Exception {
