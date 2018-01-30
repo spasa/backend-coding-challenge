@@ -1,0 +1,13 @@
+group ExpenseDAO;
+
+find(OFFSET, LIMIT) ::= <<
+SELECT * FROM expense
+WHERE user_id = :userId
+<if(OFFSET)>
+    OFFSET :offset 
+<endif>
+<if(LIMIT)>
+    LIMIT :limit 
+<endif>
+
+>>
