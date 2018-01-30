@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 public class Expense {
     
     private Long id;
-    private Long userId;
+    private Integer userId;
     private Long sessionId;
     private BigDecimal amount;
     private BigDecimal taxValue;
@@ -20,11 +20,11 @@ public class Expense {
         this.id = id;
     }
 
-    public Long getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
