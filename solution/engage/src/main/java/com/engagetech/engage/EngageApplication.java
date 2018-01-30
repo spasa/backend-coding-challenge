@@ -1,5 +1,6 @@
 package com.engagetech.engage;
 
+import com.engagetech.engage.bundle.EngageAuthenticationBundle;
 import com.engagetech.engage.bundle.EngageComponentBundle;
 import com.engagetech.engage.config.EngageConfiguration;
 import io.dropwizard.Application;
@@ -21,6 +22,7 @@ public class EngageApplication extends Application<EngageConfiguration> {
     public void initialize(Bootstrap<EngageConfiguration> bootstrap) {
         logger.info("Initialize");
         bootstrap.addBundle(new EngageComponentBundle());
+        bootstrap.addBundle(new EngageAuthenticationBundle());
     }
 
     @Override

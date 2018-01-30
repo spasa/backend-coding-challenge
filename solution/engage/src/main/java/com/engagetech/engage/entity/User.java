@@ -10,6 +10,7 @@ public class User {
     private String password;
     
     private Long sessionId;
+    private String language;
 
     public Integer getId() {
         return id;
@@ -65,6 +66,14 @@ public class User {
 
     public void setSessionId(Long sessionId) {
         this.sessionId = sessionId;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
     @Override
