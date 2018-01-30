@@ -47,3 +47,11 @@ logging:
 #      archive: true
 #      archivedLogFilenamePattern: ./logs/engage-%d.log.gz
 #      archivedFileCount: 5  
+
+jerseyClientConfiguration:
+    minThreads: 1
+    maxThreads: 128
+    workQueueSize: 8
+    gzipEnabled: false
+    gzipEnabledForRequests: false
+    chunkedEncodingEnabled: false

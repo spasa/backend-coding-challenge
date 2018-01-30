@@ -10,10 +10,15 @@ import com.engagetech.engage.pico.ComponentManager;
 import com.engagetech.engage.resource.ExpenseResource;
 import io.dropwizard.Configuration;
 import io.dropwizard.ConfiguredBundle;
+import io.dropwizard.client.JerseyClientBuilder;
+import io.dropwizard.client.JerseyClientConfiguration;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import java.io.IOException;
+import java.util.logging.Level;
+import javax.ws.rs.client.Client;
+import org.glassfish.jersey.logging.LoggingFeature;
 import org.picocontainer.MutablePicoContainer;
 import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
@@ -32,6 +37,8 @@ public class EngageComponentBundle<T extends EngageConfiguration> implements Con
         registerJdbiResources(applicationScopeContainer, environment, configuration);
         registerManagers(applicationScopeContainer, configuration, environment);
         registerResources(environment);
+        
+        registerClients(applicationScopeContainer, configuration, environment);
     }
 
     public void initialize(Bootstrap<?> btstrp) {
@@ -66,5 +73,13 @@ public class EngageComponentBundle<T extends EngageConfiguration> implements Con
         
     }
     
+    private void registerClients(MutablePicoContainer container, T configuration, Environment environment) throws Exception {
+        JerseyClientConfiguration jc = configuration.getJerseyClientConfiguration();
+        
+        Client client = new JerseyClientBuilder(environment).using(jc).build("EngageJerseyClient");
+        client.register(new LoggingFeature(java.util.logging.Logger.getLogger(LoggingFeature.DEFAULT_LOGGER_NAME), Level.INFO, LoggingFeature.Verbosity.PAYLOAD_ANY, LoggingFeature.DEFAULT_MAX_ENTITY_SIZE));
+        
+        container.addComponent(Client.class, client);
+    }
     
 }

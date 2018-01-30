@@ -2,6 +2,7 @@ package com.engagetech.engage.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
+import io.dropwizard.client.JerseyClientConfiguration;
 import io.dropwizard.db.DataSourceFactory;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -16,9 +17,18 @@ public class EngageConfiguration extends Configuration {
     @NotNull
     @JsonProperty
     private DataSourceFactory database = new DataSourceFactory();
+    
+    @Valid
+    @NotNull
+    @JsonProperty
+    private JerseyClientConfiguration jerseyClientConfiguration = new JerseyClientConfiguration();
 
     public DataSourceFactory getDatabaseFactory() {
         return database;
+    }
+
+    public JerseyClientConfiguration getJerseyClientConfiguration() {
+        return jerseyClientConfiguration;
     }
     
 }
