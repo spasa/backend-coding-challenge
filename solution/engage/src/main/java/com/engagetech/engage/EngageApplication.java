@@ -3,6 +3,7 @@ package com.engagetech.engage;
 import com.engagetech.engage.bundle.EngageAuthenticationBundle;
 import com.engagetech.engage.bundle.EngageComponentBundle;
 import com.engagetech.engage.config.EngageConfiguration;
+import com.engagetech.engage.exception.mapper.ConstraintViolationExceptionMapper;
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
@@ -30,6 +31,8 @@ public class EngageApplication extends Application<EngageConfiguration> {
     @Override
     public void run(EngageConfiguration t, Environment environment) throws Exception {
         environment.jersey().setUrlPattern("/app/*");
+        
+        environment.jersey().register(new ConstraintViolationExceptionMapper());
         
         logger.info("ENGAGE STARTED");
     }

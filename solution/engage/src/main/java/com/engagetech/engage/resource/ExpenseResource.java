@@ -8,12 +8,15 @@ import com.engagetech.engage.commons.util.JDBIUtil;
 import com.engagetech.engage.dao.ExpenseDAO;
 import com.engagetech.engage.entity.Expense;
 import com.engagetech.engage.entity.User;
+import com.engagetech.engage.entity.validation.EntityValidationChecks.CreateExpenseChecks;
 import com.engagetech.engage.exception.ApplicationException;
 import com.engagetech.engage.i18n.EngageLocale;
 import com.engagetech.engage.i18n.EngageLocaleFactory;
 import com.engagetech.engage.pico.ComponentManager;
+import io.dropwizard.validation.Validated;
 import java.sql.SQLException;
 import java.util.List;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
@@ -40,7 +43,7 @@ public class ExpenseResource {
 
     @POST
     public Response create(@Auth User user, 
-                           Expense expense) {
+                           @Valid @Validated(CreateExpenseChecks.class) Expense expense) {
         expense.setUserId(user.getId());
         expense.setSessionId(user.getSessionId());
         try {

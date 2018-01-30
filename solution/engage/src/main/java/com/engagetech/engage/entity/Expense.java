@@ -1,10 +1,13 @@
 package com.engagetech.engage.entity;
 
+import com.engagetech.engage.entity.validation.EntityValidationChecks.CreateExpenseChecks;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
 import java.util.Date;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Expense {
@@ -15,14 +18,18 @@ public class Expense {
     
     @JsonProperty("date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", timezone = "GMT")
+    @NotNull(message = "expense.entity.for.date.empty", groups = CreateExpenseChecks.class)
     private Date forDate;
     
+    @NotNull(message = "expense.entity.amount.empty", groups = CreateExpenseChecks.class)
     private BigDecimal amount;
     
     @JsonProperty("vat")
     private BigDecimal taxValue;
     
+    @NotEmpty(message = "expense.entity.reason.empty", groups = CreateExpenseChecks.class)
     private String reason;
+    
     private String currency;
 
     public Long getId() {
