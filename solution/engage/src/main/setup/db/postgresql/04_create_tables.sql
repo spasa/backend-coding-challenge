@@ -1,13 +1,13 @@
-CREATE TABLE engage.configuration ( 
+CREATE TABLE configuration ( 
 	id                   smallint  NOT NULL,
 	auth_token_duration  smallint  NOT NULL,
 	tax_percentage       numeric(19,2)  NOT NULL,
 	CONSTRAINT pk_configuration PRIMARY KEY ( id )
  );
 
-ALTER TABLE engage.configuration ADD CONSTRAINT ck_0 CHECK ( tax_percentage > 0 );
+ALTER TABLE configuration ADD CONSTRAINT ck_0 CHECK ( tax_percentage > 0 );
 
-CREATE TABLE engage."user" ( 
+CREATE TABLE "user" ( 
 	id                   integer  NOT NULL,
 	gender               smallint  ,
 	first_name           varchar(100)  ,
@@ -18,7 +18,7 @@ CREATE TABLE engage."user" (
 	CONSTRAINT pk_user PRIMARY KEY ( id )
  );
 
-CREATE TABLE engage."session" ( 
+CREATE TABLE "session" ( 
 	id                   bigint DEFAULT nextval('session_seq'::regclass) NOT NULL,
 	token                varchar(200)  NOT NULL,
 	user_id              integer  NOT NULL,
@@ -34,13 +34,13 @@ CREATE TABLE engage."session" (
 	CONSTRAINT pk_session_0 UNIQUE ( id, user_id ) 
  );
 
-CREATE INDEX idx_session ON engage."session" ( user_id );
+CREATE INDEX idx_session ON "session" ( user_id );
 
-COMMENT ON CONSTRAINT udx_session_0 ON engage."session" IS 'partial index - where active';
+COMMENT ON CONSTRAINT udx_session_0 ON "session" IS 'partial index - where active';
 
-COMMENT ON CONSTRAINT udx_session_1 ON engage."session" IS 'partial index - where active';
+COMMENT ON CONSTRAINT udx_session_1 ON "session" IS 'partial index - where active';
 
-CREATE TABLE engage.expense ( 
+CREATE TABLE expense ( 
 	id                   bigint DEFAULT nextval('expense_seq'::regclass) NOT NULL,
 	user_id              integer  NOT NULL,
 	session_id           bigint  NOT NULL,
@@ -50,17 +50,17 @@ CREATE TABLE engage.expense (
 	CONSTRAINT pk_expense PRIMARY KEY ( id )
  );
 
-ALTER TABLE engage.expense ADD CONSTRAINT ck_1 CHECK ( amount > 0 );
+ALTER TABLE expense ADD CONSTRAINT ck_1 CHECK ( amount > 0 );
 
-ALTER TABLE engage.expense ADD CONSTRAINT ck_2 CHECK ( tax_value > 0 );
+ALTER TABLE expense ADD CONSTRAINT ck_2 CHECK ( tax_value > 0 );
 
-CREATE INDEX idx_expense ON engage.expense ( session_id, user_id );
+CREATE INDEX idx_expense ON expense ( session_id, user_id );
 
-CREATE INDEX idx_expense_0 ON engage.expense ( user_id );
+CREATE INDEX idx_expense_0 ON expense ( user_id );
 
-ALTER TABLE engage.expense ADD CONSTRAINT fk_expense_session FOREIGN KEY ( session_id, user_id ) REFERENCES engage."session"( id, user_id );
+ALTER TABLE expense ADD CONSTRAINT fk_expense_session FOREIGN KEY ( session_id, user_id ) REFERENCES "session"( id, user_id );
 
-ALTER TABLE engage.expense ADD CONSTRAINT fk_expense_user FOREIGN KEY ( user_id ) REFERENCES engage."user"( id );
+ALTER TABLE expense ADD CONSTRAINT fk_expense_user FOREIGN KEY ( user_id ) REFERENCES "user"( id );
 
-ALTER TABLE engage."session" ADD CONSTRAINT fk_session_user FOREIGN KEY ( user_id ) REFERENCES engage."user"( id );
+ALTER TABLE "session" ADD CONSTRAINT fk_session_user FOREIGN KEY ( user_id ) REFERENCES "user"( id );
 
