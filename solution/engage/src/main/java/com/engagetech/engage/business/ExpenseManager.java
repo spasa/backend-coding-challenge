@@ -1,5 +1,6 @@
 package com.engagetech.engage.business;
 
+import com.engagetech.engage.commons.util.ExceptionUtil;
 import com.engagetech.engage.commons.util.JDBIUtil;
 import com.engagetech.engage.dao.ExpenseDAO;
 import com.engagetech.engage.entity.Expense;
@@ -32,8 +33,7 @@ public class ExpenseManager {
             
             handle.commit();
         } catch (DBIException | SQLException ex) {
-//            TODO: handle exception
-
+            ExceptionUtil.handleException(ex, locale, "expense.manager.create.expense.error");
         } finally {
             if (handle != null) {
                 handle.rollback();
