@@ -2,6 +2,7 @@
 echo "Create database script"
 
 psql -h localhost -U postgres -c "drop database engage"
+psql -h localhost -U postgres -c "create user engage with encrypted password 'engage' valid until '2020-12-31'"
 psql -h localhost -U postgres -c "create database engage with owner=engage;"
 
 
